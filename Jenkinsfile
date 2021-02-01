@@ -1,6 +1,11 @@
 pipeline {
     agent none
     stages{
+        stage("Prepare environment"){
+            steps{
+                echo "preparing environment"
+            }
+        }
         stage("Validate terraform") {
             agent {
                 docker {
