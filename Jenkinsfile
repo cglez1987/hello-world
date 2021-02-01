@@ -6,9 +6,9 @@ pipeline {
                 echo "========Validating changes========"
             }
         }
-        stage("Test") { 
+        stage("Pull Request") { 
             steps{
-                echo "====++ Testing with terratest ++++===="
+                echo "====++ Testing pull request ++++===="
             }
         }
     }
