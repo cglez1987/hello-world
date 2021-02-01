@@ -3,12 +3,12 @@ pipeline {
     stages{
         stage("Validate terraform") {
             agent {
-                docker { image 'hashicorp/terraform:latest'}
+                docker { image 'hashicorp/terraform:light'}
             }
             steps{
                 echo "========Validating files========"
                 sh 'cd /dev'
-                sh 'terraform validate'
+                sh 'validate'
             }
         }
         stage("Test") { 
