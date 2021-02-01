@@ -14,6 +14,7 @@ pipeline {
             }
         }
         stage("Validation") { 
+            when {branch 'master'}
             steps{
                 echo "====++ Validate terraform files ++++===="
                 sh 'terraform validate'
