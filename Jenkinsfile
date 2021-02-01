@@ -1,14 +1,18 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'hashicorp/terraform:latest'}
+    }
     stages{
-        stage("Validate") {
+        stage("Validate terraform") {
             steps{
-                echo "========Validating changes========"
+                echo "========Validating files========"
+                sh 'cd /dev'
+                sh 'terraform validate'
             }
         }
-        stage("Pull Request") { 
+        stage("Test") { 
             steps{
-                echo "====++ Testing pull request ++++===="
+                echo "====++ Testing with terratest ++++===="
             }
         }
     }
