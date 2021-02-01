@@ -10,8 +10,9 @@ pipeline {
             }
             steps{
                 echo "========Validating files========"
-                sh 'terraform validate'
+                sh 'cd /network'
                 sh 'terraform init'
+                sh 'terraform validate'
             }
         }
     }
