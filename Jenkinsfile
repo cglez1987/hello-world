@@ -4,7 +4,7 @@ pipeline {
         stage("Validate terraform") {
             agent {
                 docker {
-                   image 'maven:3-alpine'
+                   image 'hashicorp/terraform:light'
                    args  "--entrypoint=''"
                 }
             }
