@@ -11,6 +11,7 @@ pipeline {
             steps{
                 echo "========Validating files========"
                 sh 'terraform validate'
+                sh 'terraform init'
             }
         }
     }
