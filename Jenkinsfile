@@ -3,7 +3,10 @@ pipeline {
     stages{
         stage("Validate terraform") {
             agent {
-                docker { image 'hashicorp/terraform:light'}
+                docker {
+                   image 'maven:3-alpine'
+                   args  "--entrypoint=''"
+                }
             }
             steps{
                 echo "========Validating files========"
