@@ -11,7 +11,7 @@ pipeline {
             steps{
                 script{
                     echo "preparing environment"
-                    if (System.getenv("GIT_BRANCH") == 'master')
+                    if ("${env.GIT_BRANCH}" == 'master')
                         echo "This is a master change"
                     else
                         echo "Nop........!!!!"
