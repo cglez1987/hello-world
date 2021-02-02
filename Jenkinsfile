@@ -5,8 +5,10 @@ pipeline {
     }
     stages{
         stage("test"){
-            sh "cd network"
-            sh 'ls -l'
+            steps{
+                sh "cd network"
+                sh 'ls -l'
+            }
         }
     }
     /*
