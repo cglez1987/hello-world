@@ -6,7 +6,7 @@ pipeline {
     stages{
         stage("test"){
             steps{
-                sh 'ls -l network'
+                sh 'cd network && ls -l'
             }
         }
     }
