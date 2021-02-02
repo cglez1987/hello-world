@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     environment{
         TEMP = ''
     }
@@ -39,6 +39,7 @@ pipeline {
             steps{
                 echo "========Initializing terraform modules========"
                 sh 'cd network'
+                sh 'ls -l'
                 sh 'terraform init'
             }
         }
