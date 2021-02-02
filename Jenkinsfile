@@ -7,6 +7,7 @@ pipeline {
         stage("Prepare environment"){
             steps{
                 sh 'cd network'
+                sh 'ls -l'
             }
         }
         stage("Get AWS parameters"){
@@ -52,6 +53,7 @@ pipeline {
             when {branch 'master'}
             steps{
                 echo "====++ Enter to planification stage ++++===="
+                sh 'ls -l'
             }
         }
     }
