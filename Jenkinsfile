@@ -6,7 +6,11 @@ pipeline {
     stages{
         stage("test"){
             steps{
-                sh 'cd network && ls -l'
+                dir("network"){
+                    sh 'ls -l'
+                }
+                echo "Estoy afuera"
+                sh 'ls -l'
             }
         }
     }
