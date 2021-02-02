@@ -18,13 +18,14 @@ pipeline {
                     {
                         echo "This is a master change"
                         TEMP = "carlos"
+                        echo "TEMP value is: ${TEMP}"
                     }
                     else
                     {
                         echo "Nop........!!!!"
                         TEMP = "joseee"
                     }
-                    sh 'echo grep $(ls -l) "${TEMP}"'
+                    sh 'ls -l | grep "${TEMP}"'
                 }
             }
         }
