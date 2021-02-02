@@ -1,12 +1,12 @@
 pipeline {
     agent any
     environment{
-        TEMP = ''
+        TEMP = 'network'
     }
     stages{
         stage("test"){
             steps{
-                dir("network"){
+                dir("${TEMP}"){
                     sh 'ls -l'
                 }
                 echo "Estoy afuera"
