@@ -1,4 +1,5 @@
 pipeline {
+    agent none
     stages{
         stage("Prepare environment"){
             agent {
@@ -8,8 +9,10 @@ pipeline {
                 }
             }
             steps{
-                echo "preparing environment"
-                sh 'aws --version'
+                script{
+                    echo "preparing environment"
+                    sh 'aws --version'
+                }
             }
         }
         stage("Validate terraform") {
