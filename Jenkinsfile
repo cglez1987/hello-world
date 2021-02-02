@@ -4,12 +4,12 @@ pipeline {
         TEMP = ''
     }
     stages{
-        stage{
+        stage("Prepare environment"){
             steps{
                 sh 'cd network'
             }
         }
-        stage("Prepare environment"){
+        stage("Get AWS parameters"){
             agent {
                 docker {
                    image 'amazon/aws-cli'
