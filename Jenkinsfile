@@ -1,5 +1,4 @@
 pipeline {
-    agent none
     stages{
         stage("Prepare environment"){
             agent {
@@ -21,10 +20,23 @@ pipeline {
                 }
             }
             steps{
-                echo "========Validating files========"
+                echo "========Initializing terraform modules========"
                 sh 'cd network'
                 sh 'terraform init'
+            }
+        }
+        stage("Validation") { 
+            when {branch 'master'}
+            steps{
+                echo "====++ Validate terraform files ++++===="
                 sh 'terraform validate'
+            }
+        }
+        stage("Planification") { 
+            when {branch 'master'}
+            steps{
+                echo "====++ Enter to planification stage ++++===="
+                sh 'terraform plan'
             }
         }
     }
