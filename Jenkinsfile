@@ -24,7 +24,7 @@ pipeline {
                         echo "Nop........!!!!"
                         TEMP = "joseee"
                     }
-                    echo 'echo grep $(ls -l) "${TEMP}"'
+                    sh 'echo grep $(ls -l) "${TEMP}"'
                 }
             }
         }
