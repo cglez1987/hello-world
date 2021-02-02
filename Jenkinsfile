@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    environment{
+        TEMP = ''
+    }
     stages{
         stage("Prepare environment"){
             agent {
@@ -12,10 +15,16 @@ pipeline {
                 script{
                     echo "preparing environment"
                     if ("${env.GIT_BRANCH}" == 'master')
+                    {
                         echo "This is a master change"
+                        TEMP = "carlos"
+                    }
                     else
+                    {
                         echo "Nop........!!!!"
-                    sh 'aws --version'
+                        TEMP = "joseee"
+                    }
+                    echo 'echo grep $(ls -l) "${TEMP}"'
                 }
             }
         }
