@@ -4,6 +4,13 @@ pipeline {
         TEMP = ''
     }
     stages{
+        stage("test"){
+            sh "cd network"
+            sh 'ls -l'
+        }
+    }
+    /*
+    stages{
         stage("Prepare environment"){
             steps{
                 sh 'cd network'
@@ -56,5 +63,5 @@ pipeline {
                 sh 'ls -l'
             }
         }
-    }
+    }*/
 }
