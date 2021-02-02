@@ -1,12 +1,24 @@
 pipeline {
-    agent {
-        docker {
-            image 'hashicorp/terraform:light'
-            args  "--entrypoint=''"
-        }
-    }
     stages{
-        stage("Initialization") {
+        stage("Prepare environment"){
+            agent {
+                docker {
+                   image 'amazon/aws-cli'
+                   args  "--entrypoint=''"
+                }
+            }
+            steps{
+                echo "preparing environment"
+                sh 'aws --version'
+            }
+        }
+        stage("Validate terraform") {
+            agent {
+                docker {
+                   image 'hashicorp/terraform:light'
+                   args  "--entrypoint=''"
+                }
+            }
             steps{
                 echo "========Initializing terraform modules========"
                 sh 'cd network'
