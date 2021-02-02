@@ -4,6 +4,11 @@ pipeline {
         TEMP = ''
     }
     stages{
+        stage{
+            steps{
+                sh 'cd network'
+            }
+        }
         stage("Prepare environment"){
             agent {
                 docker {
@@ -38,23 +43,15 @@ pipeline {
             }
             steps{
                 echo "========Initializing terraform modules========"
-                sh 'cd network'
                 sh 'ls -l'
                 sh 'terraform init'
-            }
-        }
-        stage("Validation") { 
-            when {branch 'master'}
-            steps{
-                echo "====++ Validate terraform files ++++===="
-                sh 'terraform validate'
+                sh 'terraform plan'
             }
         }
         stage("Planification") { 
             when {branch 'master'}
             steps{
                 echo "====++ Enter to planification stage ++++===="
-                sh 'terraform plan'
             }
         }
     }
