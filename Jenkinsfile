@@ -9,7 +9,7 @@ pipeline {
                 dir("${TEMP}"){
                     sh 'ls -l'
                 }
-                echo "Estoy afuera"
+                echo "Estoy afueraaa"
                 sh 'ls -l'
             }
         }
