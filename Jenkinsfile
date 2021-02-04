@@ -18,7 +18,7 @@ pipeline {
             steps{
                 echo "====++ Enter to planification stage ++++===="
                 sh "git tag -a v1.1 -m ${BUILD_TAG}"
-				sh "git push --tags origin master"
+				sh "git push --tags origin"
             }
         }
 	}
