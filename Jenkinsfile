@@ -16,12 +16,14 @@ pipeline {
         stage("Planification") { 
             when {branch 'master'}
             steps{
-				withCredentials([usernamePassword(credentialsId: 'GitHub', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-					echo "====++ Enter to planification stage ++++===="
-					sh 'git config --local credential.helper "!p() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; p"'
-					sh "git tag -a v1.6 -m ${BUILD_TAG}"
-					sh "git push --tags origin"
+				environment { 
+					GIT_AUTH = credentials('GitHub') 
 				}
+				sh('''
+					git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
+				    git tag -a v1.8 -m ${BUILD_TAG}
+					git push --tags origin
+				''')
             }
         }
 	}
