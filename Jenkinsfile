@@ -18,7 +18,8 @@ pipeline {
             steps{
 				withCredentials([usernamePassword(credentialsId: 'GitHub', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
 					echo "====++ Enter to planification stage ++++===="
-					sh "git tag -a v1.5 -m ${BUILD_TAG}"
+					sh 'git config --local credential.helper "!p() { echo username=\\$GIT_USERNAME; echo password=\\$GIT_PASSWORD; }; p"'
+					sh "git tag -a v1.6 -m ${BUILD_TAG}"
 					sh "git push --tags origin"
 				}
             }
