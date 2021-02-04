@@ -16,7 +16,7 @@ pipeline {
         stage("Planification") { 
             when {branch 'master'}
 			environment { 
-				GIT_AUTH = credentials('GitHub') 
+				GIT_AUTH = credentials('GitHub-UserPass') 
 			}
             steps{
 				sh('''
