@@ -15,10 +15,10 @@ pipeline {
         }
         stage("Planification") { 
             when {branch 'master'}
+			environment { 
+				GIT_AUTH = credentials('GitHub') 
+			}
             steps{
-				environment { 
-					GIT_AUTH = credentials('GitHub') 
-				}
 				sh('''
 					git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
 				    git tag -a v1.8 -m ${BUILD_TAG}
