@@ -16,13 +16,15 @@ pipeline {
         stage("Planification") { 
             when {branch 'master'}
             steps{
-                echo "====++ Enter to planification stage ++++===="
-                sh "git tag -a v1.2 -m ${BUILD_TAG}"
-				sh "git push --tags origin"
+				withCredentials([string(credentialsId: 'GitHub')]) {
+					echo "====++ Enter to planification stage ++++===="
+					sh "git tag -a v1.1 -m ${BUILD_TAG}"
+					sh "git push --tags origin master"
+				}
             }
         }
-   }
-    post{
+	}
+	post{
         always{
             echo 'Cleaning the workspace'
             cleanWs()
