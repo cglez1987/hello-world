@@ -13,17 +13,19 @@ pipeline {
                 sh 'ls -l'
             }
         }
-        stage("Planification") { 
-            when {branch 'master'}
-			environment { 
+        stage("Release"){
+            environment { 
 				GIT_AUTH = credentials('GitHub-UserPass') 
 			}
             steps{
-				sh('''
-					git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
-				    git tag -a v1.8 -m ${BUILD_TAG}
-					git push --tags origin
-				''')
+                echo "====++++Creating release with tag++++===="
+                script{
+                    tagVersion = input(id: 'tagVersion', message: 'Enter the tag version: ', parameters: [string(defaultValue: '', description: '', name: 'Tag Version')])
+                }
+				sh "git config --local credential.helper '!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f'"
+                sh  "git fetch --tags"
+				sh  "git tag -a ${tagVersion} -m ${BUILD_TAG}"
+				sh	"git push --tags origin"
             }
         }
 	}
